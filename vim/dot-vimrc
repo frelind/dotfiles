@@ -1,0 +1,9 @@
+set number
+set background=dark
+
+filetype plugin indent on
+set autoindent
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+
+au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml
+autocmd FileType yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab

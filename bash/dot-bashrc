@@ -1,0 +1,46 @@
+# .bashrc
+
+# Exit if not running interactive shell
+[[ -z $PS1 ]] && return
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+[[ -f ${HOME}/.bash_aliases ]] && source ${HOME}/.bash_aliases
+
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
+# User specific aliases and functions
+
+# One tab to show possible completions
+bind 'set show-all-if-ambiguous on'
+
+# Set vim as default editor
+export EDITOR=vim
+
+# Bash history
+export HISTSIZE="-1"
+export HISTFILESIZE="-1"
+export HISTCONTROL=erasedups
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+
+# git prompt
+if [[ -f ~/.git-prompt.sh ]]; then
+    . ~/.git-prompt.sh
+    GIT_PS1_SHOWDIRTYSTATE=1
+    GIT_PS1_SHOWSTASHSTATE=1
+    GIT_PS1_SHOWCOLORHINTS=1
+    GIT_PS1_SHOWUNTRACKEDFILES=1
+    GIT_PS1_SHOWUPSTREAM="auto"
+    PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "\\\$ "'
+fi
